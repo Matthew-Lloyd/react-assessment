@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import ToDoList from './ToDoList';
+import ToDoList from './components/ToDoList';
 import {Link, Route, Redirect} from 'react-router-dom';
 
 class App extends Component {
