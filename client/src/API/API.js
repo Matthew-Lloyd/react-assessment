@@ -5,8 +5,6 @@ const getTodos = () => {
 }
 
 const postTodo = (data) => {
-    console.log(data);
-    debugger
     const postHeaders = new Headers();
     postHeaders.append('Content-Type', 'application/json');
     return isoFetch(`https://practiceapi.devmountain.com/api/tasks`, {

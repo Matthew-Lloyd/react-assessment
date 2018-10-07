@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import ToDoList from './components/ToDoList';
+import NewToDoForm from './components/NewToDoForm';
 import {Link, Route, Redirect} from 'react-router-dom';
 
 class App extends Component {
@@ -16,6 +17,11 @@ class App extends Component {
           <Link to="/todos/new">Add New To-Do!</Link>
         </p>
         <Route path="/todos" component={ToDoList} />
+        <Route
+          path="/todos/new"
+          component={props => (<NewToDoForm {...props} handleSubmit={this.handleAdd} />
+          )}
+        />
         <Route exact path="/" render={() => <Redirect to='/todos' />} />
       </div>
     );

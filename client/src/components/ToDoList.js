@@ -1,22 +1,24 @@
 import React, {Component} from 'react';
 import ToDo from './ToDo';
-import { handleAdd, removeToDo, getTodos} from '../store/actions/actionCreators';
-import { getTodosSaga } from '../store/sagas/todoSaga';
+import { handleAdd, handleComplete, handleRemove, getTodos} from '../store/actions/actionCreators';
 import { connect } from 'react-redux';
 import {Route} from 'react-router-dom';
-import NewToDoForm from './NewToDoForm';
-import PropTypes from 'prop-types';
-import {
-	Grid, 
-	List, 
- } from '@material-ui/core';
+import { Grid, List } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
     listRoot: {
-        flexGrow: 1,
+        // flexGrow: 1,
         width: '100%',
         maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: "#3C4858",
+        // textAlign: 'center'
+    },
+    completed: {
+        color: 'gray',
+        textDecoration: 'line-through'
+    },
+    uncompleted: {
+        color: 'black',
     }
 });
 
@@ -28,42 +30,51 @@ class ToDoList extends Component {
     }
     componentDidMount() {
         // debugger
+        console.log(this.props);
         this.props.getTodos();
     }
     handleAdd(val) {
         this.props.handleAdd(val);
     }
     removeToDo(id) {
-        this.props.removeToDo(id);
+        this.props.handleRemove(id);
+    }
+    
+    handleComplete(id) {
+        this.props.handleComplete(id);
     }
     render () {
         // debugger
+        // export const TodoList = ({ classes, todos }) => (
+        //     <Grid container justify="center">
+        //         <List className={classes.listRoot} >
+        //             {todos.map(todo =>
+        //                 <TodoListItem key={todo.id} todo={todo} />)}
+        //         </List>
+        //     </Grid>
+        // );
             let todos = this.props.todos.map((val, index) => (
-                    <ToDo
-                        removeToDo={this.removeToDo.bind(this, val.id)}
-                        task={val.title}
-                        description={val.description}
-                        status={val.completed}
-                        loading={val.loading}
-                        id={index}    
-                    />
+                <ToDo
+                    removeToDo={this.removeToDo.bind(this, val.id)}
+                    handleComplete={this.handleComplete.bind(this, val.id)}
+                    task={val.title}
+                    description={val.description}
+                    status={val.completed}
+                    loading={val.loading}
+                    id={index}    
+                />
         ));
         return (
         <div>
-            <Route
-                path="/todos/new"
-                component={props => (<NewToDoForm {...props} handleSubmit={this.handleAdd} />
-                )}
-             />
-            <Route exact path="/todos" component={() => <div>{todos}</div>} />
+            <Grid container justify="center">
+                <List className={this.props.classes.listRoot}>
+                    <Route exact path="/todos" component={() => <div>{todos}</div>} />
+                </List>
+            </Grid>
         </div>
         );
     }
 }
-
-ToDoList.propTypes = {
-    classes: PropTypes.object.isRequired
-};
 
 function mapStatetoProps(reduxState) {
     // debugger;
@@ -71,4 +82,4 @@ function mapStatetoProps(reduxState) {
         todos: reduxState.todos
     };
 }
-export default connect(mapStatetoProps, { handleAdd, removeToDo, getTodos })(withStyles(styles)(ToDoList));
+export default connect(mapStatetoProps, { handleAdd, handleRemove, handleComplete, getTodos })(withStyles(styles)(ToDoList));

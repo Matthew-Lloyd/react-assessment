@@ -3,23 +3,29 @@ import * as ActionTypes from "./actionTypes"
 
 
 export function getTodos() {
-    // debugger
     return {
         type: ActionTypes.GET_TODOS_INITIALIZE
     };
 }
 
 export function handleAdd(todo) {
-    console.log(todo);
     return {
         type: ActionTypes.ADD_TODO,
         todo
     };
 }
 
-function handleRemove(id) {
+export function handleRemove(id) {
     return {
         type: ActionTypes.REMOVE_TODO,
+        id
+    };
+}
+
+
+export function handleComplete(id) {
+    return {
+        type: ActionTypes.COMPLETE_TODO,
         id
     };
 }

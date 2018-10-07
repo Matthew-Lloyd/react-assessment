@@ -7,41 +7,35 @@ import {
     Button
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
+// import { handleComplete } from '../store/actions/actionCreators';
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+const styles = theme => ({
+    listRoot: {
+        // flexGrow: 1,
+        // width: '100%',
+        // maxWidth: 360,
+        // backgroundColor: "#3C4858",
+        // textAlign: 'center'
+    }
+});
 
-const ToDo = ({task, status, removeToDo, description}) => <ListItem>
-    <ListItemText>{task}<IconButton onClick={removeToDo}><Close /></IconButton></ListItemText>
-    {/* <p>{status.toString()}</p> */}
-    <p>{description}</p>
 
+const ToDo = ({ id, task, status, removeToDo, handleComplete }) => <ListItem>
+    <ListItemText 
+        style={status ? (
+            {color: 'grey', textDecoration: 'line-through'}
+            ) : (
+            {color: 'black'})}
+    >
+        {id}: {task}
+    </ListItemText>
+    <Button onClick={handleComplete}>
+        Complete
+    </Button>
+    <IconButton onClick={removeToDo}>
+        <Close>X</Close>
+    </IconButton>
 </ListItem>;
-// export const TodoListItem = ({ todo, classes, removeToDo, completeTodo, history }) => (
-//     <ListItem
-//         key={todo.id}
-//         dense
-//         button
-//         onClick={() => { history.push(`/edit/${todo.id}`) }}
-//         className={classes.ListItem}
-//     >
-//         <ListItemText
-//             className={
-//                 todo.completed ?
-//                     classes.listItemCompleted
-//                     : null
-//             }
-//             primary={`${todo.id} : ${todo.title}`} />
-//         <ListItemSecondaryAction>
-//             <Button
-//                 variant="raised"
-//                 color="default"
-//                 size="small"
-//                 disabled={todo.completed}
-//                 tabIndex={-1}
-//                 onClick={() => completeTodo(todo.id)}
-//             >Completed</Button>
-//             <IconButton onClick={() => removeToDo(todo.id)}>
-//                 <Close />
-//             </IconButton>
-//         </ListItemSecondaryAction>
-//     </ListItem>
-// );
+
 export default ToDo;
