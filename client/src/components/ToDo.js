@@ -13,11 +13,7 @@ import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
     listRoot: {
-        // flexGrow: 1,
-        // width: '100%',
-        // maxWidth: 360,
         backgroundColor: "#FFFFFF",
-        // textAlign: 'center'
     }
 });
 
@@ -55,8 +51,6 @@ const ToDo = ({ classes, id, task, status, removeToDo, handleComplete, history }
 </ListItem>
 )
 const mapDispatchToProps = (dispatch) => ({
-    // removeTodo: (id) => dispatch(removeTodo(id)),
-    // completeTodo: (id) => dispatch(completeTodo(id))
 })
 
 export default connect(null, mapDispatchToProps)(withStyles(styles)(withRouter(ToDo)));

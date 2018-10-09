@@ -8,11 +8,9 @@ import { Grid, List } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
     listRoot: {
-        // flexGrow: 1,
         width: '100%',
         maxWidth: 360,
         backgroundColor: "#3C4858",
-        // textAlign: 'center'
     },
     completed: {
         color: 'gray',
@@ -46,14 +44,6 @@ class ToDoList extends Component {
     }
     render () {
         // debugger
-        // export const TodoList = ({ classes, todos }) => (
-        //     <Grid container justify="center">
-        //         <List className={classes.listRoot} >
-        //             {todos.map(todo =>
-        //                 <TodoListItem key={todo.id} todo={todo} />)}
-        //         </List>
-        //     </Grid>
-        // );
             let todos = this.props.todos.todos.map((val, index) => (
                 <ToDo
                     removeToDo={this.removeToDo.bind(this, val.id)}

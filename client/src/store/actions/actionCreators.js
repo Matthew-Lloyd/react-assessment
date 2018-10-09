@@ -1,4 +1,3 @@
-import API from "../../API/API"
 import * as ActionTypes from "./actionTypes"
 
 
