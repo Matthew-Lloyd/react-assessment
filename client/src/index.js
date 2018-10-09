@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import {createStore, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
 import { watchTodos } from './store/sagas';
 
-
-
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-    rootReducer, compose(
+    combineReducers({
+        todos: rootReducer
+    }), compose(
         applyMiddleware(sagaMiddleware),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )

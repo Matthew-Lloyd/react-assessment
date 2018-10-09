@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export default function rootReducer (state = initialState, action) {
-    debugger
+    // debugger
     switch (action.type) {
         case ActionTypes.GET_TODOS_SUCCESS: 
             return {

@@ -4,6 +4,7 @@ import { Grid, Button, Paper, TextField, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { handleAdd } from '../store/actions/actionCreators';
+import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
     addNewRoot: {
@@ -29,7 +30,7 @@ export class NewToDoForm extends Component {
         this.setState({ [name]: value });
     }
 
-    handleSubmitTodo = () => {
+    handleSubmitTodo = (history) => {
         if (this.state.title === "" || this.state.title.length < 3) {
             console.log("Title is required for the todo");
         } else {
@@ -63,7 +64,7 @@ export class NewToDoForm extends Component {
                                     color="primary"
                                     variant="raised"
                                     onClick={this.handleSubmitTodo}
-                                >Add Todo</Button>
+                                >Add New To-do</Button>
                             </Grid>
                         </Grid>
                     </Paper>
@@ -82,67 +83,4 @@ const mapDispatchToProps = (dispatch) => ({
     handleAdd: (todo) => dispatch(handleAdd(todo))
 });
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(NewToDoForm));
-
-// export default class NewToDoForm extends Component {
-//     constructor(props) {
-//         super(props)
-//         this.handleSubmit = this.handleSubmit.bind(this);
-//         this.handleChange = this.handleChange.bind(this);
-//         this.state = {
-//             task: ""
-//         };
-
-//     }
-//     handleSubmit(e) {
-//         e.preventDefault();
-//         this.props.handleSubmit(this.state.task);
-//         e.target.reset();
-//         this.props.history.push("/todos");
-
-//     }
-//     handleChange(e) {
-//         this.setState({
-//             [e.target.name]: e.target.value
-//         });
-//     }
-//     state = {
-//         title: "",
-//         description: "",
-//         completed: false
-//     }
-
-//     handleOnChange = (event) => {
-//         const { name, value } = event.target;
-//         this.setState({ [name]: value });
-//     }
-
-//     handleSubmitTodo = () => {
-//         if (this.state.title === "" || this.state.title.length < 3) {
-//             console.log("Title is required for the todo");
-//         } else {
-//             this.props.addTodo(this.state);
-//             this.setState({ title: "" });
-//         }
-//     }
-
-
-//     render () {
-//         return (
-//             <div>
-                
-//             <form onSubmit={this.handleSubmit}>
-//                 <label htmlFor="task">Task</label>
-//                 <input
-//                     type="text"
-//                     name="task"
-//                     id="task"
-//                     onChange={this.handleChange}
-//                 />
-//                 <button>Add a Todo!</button>
-//             </form>
-//             </div>
-
-//         )
-//     }
-// }
+export default connect(null, mapDispatchToProps)(withStyles(styles)(withRouter(NewToDoForm)));

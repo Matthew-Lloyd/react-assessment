@@ -3,3 +3,4 @@ export const REMOVE_TODO = 'REMOVE_TODO';
 export const GET_TODOS_INITIALIZE = "GET_TODOS_INITIALIZE";
 export const GET_TODOS_SUCCESS = "GET_TODOS_SUCCESS";
 export const COMPLETE_TODO = "COMPLETE_TODO";
+export const EDIT_TODO = "EDIT_TODO";

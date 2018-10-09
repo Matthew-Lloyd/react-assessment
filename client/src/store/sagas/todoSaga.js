@@ -44,3 +44,13 @@ export function* completeTodoSaga(action) {
         yield err => console.log("something went wrong", err);
     }
 };
+
+export function* editTodoSaga(action) {
+    try {
+        const response = yield API.patchTodo(action.id, action.updates);
+        const todos = yield response.json();
+        yield put({ type: ActionTypes.GET_TODOS_INITIALIZE });
+    } catch (error) {
+        yield err => console.log("something went wrong", err);
+    }
+}

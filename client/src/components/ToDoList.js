@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ToDo from './ToDo';
+import NewToDoForm from './NewToDoForm';
 import { handleAdd, handleComplete, handleRemove, getTodos} from '../store/actions/actionCreators';
 import { connect } from 'react-redux';
 import {Route} from 'react-router-dom';
@@ -53,7 +54,7 @@ class ToDoList extends Component {
         //         </List>
         //     </Grid>
         // );
-            let todos = this.props.todos.map((val, index) => (
+            let todos = this.props.todos.todos.map((val, index) => (
                 <ToDo
                     removeToDo={this.removeToDo.bind(this, val.id)}
                     handleComplete={this.handleComplete.bind(this, val.id)}
@@ -61,15 +62,17 @@ class ToDoList extends Component {
                     description={val.description}
                     status={val.completed}
                     loading={val.loading}
-                    id={index}    
+                    id={val.id}
+                    key={index}    
                 />
         ));
         return (
         <div>
             <Grid container justify="center">
-                <List className={this.props.classes.listRoot}>
-                    <Route exact path="/todos" component={() => <div>{todos}</div>} />
-                </List>
+                <NewToDoForm handleSubmit={this.handleAdd} />
+                    <List className={this.props.classes.listRoot}>
+                        <Route exact path="/todos" component={() => <div>{todos}</div>} />
+                    </List>
             </Grid>
         </div>
         );
