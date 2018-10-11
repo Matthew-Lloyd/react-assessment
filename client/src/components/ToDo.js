@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
     ListItem,
     ListItemText,
@@ -7,11 +7,10 @@ import {
     Button
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
-import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 
-const styles = theme => ({
+const styles = () => ({
     listRoot: {
         backgroundColor: "#FFFFFF",
     }
@@ -50,7 +49,5 @@ const ToDo = ({ classes, id, task, status, removeToDo, handleComplete, history }
     </ListItemSecondaryAction>
 </ListItem>
 )
-const mapDispatchToProps = (dispatch) => ({
-})
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(withRouter(ToDo)));
+export default (withStyles(styles)(withRouter(ToDo)));

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {Route} from 'react-router-dom';
 import { Grid, List } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-const styles = theme => ({
+const styles = () => ({
     listRoot: {
         width: '100%',
         maxWidth: 360,
@@ -25,15 +25,11 @@ const styles = theme => ({
 class ToDoList extends Component {
     constructor (props) {
         super (props);
-        this.handleAdd = this.handleAdd.bind(this);
     }
     componentDidMount() {
         // debugger
         console.log(this.props);
         this.props.getTodos();
-    }
-    handleAdd(val) {
-        this.props.handleAdd(val);
     }
     removeToDo(id) {
         this.props.handleRemove(id);
@@ -59,7 +55,7 @@ class ToDoList extends Component {
         return (
         <div>
             <Grid container justify="center">
-                <NewToDoForm handleSubmit={this.handleAdd} />
+                <NewToDoForm handleSubmit={this.props.handleAdd} />
                     <List className={this.props.classes.listRoot}>
                         <Route exact path="/todos" component={() => <div>{todos}</div>} />
                     </List>
@@ -75,4 +71,9 @@ function mapStatetoProps(reduxState) {
         todos: reduxState.todos
     };
 }
-export default connect(mapStatetoProps, { handleAdd, handleRemove, handleComplete, getTodos })(withStyles(styles)(ToDoList));
+export default connect(mapStatetoProps, { 
+    handleAdd, 
+    handleRemove, 
+    handleComplete, 
+    getTodos
+ })(withStyles(styles)(ToDoList));
