@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ToDoList from './components/ToDoList';
 import DetailedView from './components/DetailedView/DetailedView';
-import {Link, Route, Redirect} from 'react-router-dom';
+import {Route, Redirect} from 'react-router-dom';
 
 class App extends Component {
   render() {

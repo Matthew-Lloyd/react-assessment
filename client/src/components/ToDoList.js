@@ -23,12 +23,9 @@ const styles = () => ({
 
 
 class ToDoList extends Component {
-    constructor (props) {
-        super (props);
-    }
     componentDidMount() {
         // debugger
-        console.log(this.props);
+        console.log(this.props)
         this.props.getTodos();
     }
     removeToDo(id) {
