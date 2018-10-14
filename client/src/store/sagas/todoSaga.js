@@ -8,8 +8,8 @@ export function* getTodosSaga() {
         const response = yield call(API.getTodos);
         const todos = yield response.json();
         yield put({ type: ActionTypes.GET_TODOS_SUCCESS, todos: todos })
-    } catch (error) {    
-        yield put({ type: ErrorTypes.GET_TODOS_ERROR, error: error });
+    } catch (error) {
+        yield put({ type: ErrorTypes.GET_TODOS_ERROR, error: error.message });
     }
 };
 
@@ -18,7 +18,7 @@ export function* addTodoSaga(action) {
         yield API.postTodo(action.todo);
         yield put({ type: ActionTypes.GET_TODOS_INITIALIZE });
     } catch (error) {
-        yield put({ type: ErrorTypes.ADD_TODO_ERROR, error: error });
+        yield put({ type: ErrorTypes.ADD_TODO_ERROR, error: error.message });
     }
 };
 
@@ -27,7 +27,7 @@ export function* deleteTodoSaga(action) {
         yield API.deleteTodo(action.id);
         yield put({ type: ActionTypes.GET_TODOS_INITIALIZE });
     } catch (error) {
-        yield put({ type: ErrorTypes.REMOVE_TODO_ERROR, error: error });
+        yield put({ type: ErrorTypes.REMOVE_TODO_ERROR, error: error.message });
     }
 };
 
@@ -36,7 +36,7 @@ export function* completeTodoSaga(action) {
         yield API.putTodo(action.id);
         yield put({ type: ActionTypes.GET_TODOS_INITIALIZE });
     } catch (error) {
-        yield put({ type: ErrorTypes.COMPLETE_TODO_ERROR, error: error });
+        yield put({ type: ErrorTypes.COMPLETE_TODO_ERROR, error: error.message });
     }
 };
 
@@ -45,6 +45,6 @@ export function* editTodoSaga(action) {
         yield API.patchTodo(action.id, action.updates);
         yield put({ type: ActionTypes.GET_TODOS_INITIALIZE });
     } catch (error) {
-        yield put({ type: ErrorTypes.EDIT_TODO_ERROR, error: error });
+        yield put({ type: ErrorTypes.EDIT_TODO_ERROR, error: error.message });
     }
 }

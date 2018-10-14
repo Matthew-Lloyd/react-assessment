@@ -18,36 +18,36 @@ const styles = () => ({
 
 
 const ToDo = ({ classes, id, task, status, removeToDo, handleComplete, history }) => (
-<ListItem
+    <ListItem
         key={id}
         dense
         button
-        className={classes.listRoot} 
+        className={classes.listRoot}
         onClick={() => { history.push(`/todo/details/${id}`) }}
-        >
-    <ListItemText 
-        style={status ? (
-            {color: 'grey', textDecoration: 'line-through'}
-            ) : (
-            {color: 'black'})}
     >
-        {id}: {task}
-    </ListItemText>
-    <ListItemSecondaryAction>
-        <Button 
-            variant="raised"
-            color="default"
-            size="small"
-            disabled={status}
-            tabIndex={-1}
-            onClick={handleComplete}>
-            Complete
+        <ListItemText
+            style={status ? (
+                { color: 'grey', textDecoration: 'line-through' }
+            ) : (
+                    { color: 'black' })}
+        >
+            {id}: {task}
+        </ListItemText>
+        <ListItemSecondaryAction>
+            <Button
+                variant="raised"
+                color="default"
+                size="small"
+                disabled={status}
+                tabIndex={-1}
+                onClick={handleComplete}>
+                Complete
         </Button>
-        <IconButton onClick={removeToDo}>
-            <Close>X</Close>
-        </IconButton>
-    </ListItemSecondaryAction>
-</ListItem>
+            <IconButton onClick={removeToDo}>
+                <Close>X</Close>
+            </IconButton>
+        </ListItemSecondaryAction>
+    </ListItem>
 )
 
 export default (withStyles(styles)(withRouter(ToDo)));

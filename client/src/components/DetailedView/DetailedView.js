@@ -8,6 +8,7 @@ import { getTodos, editTodo, handleComplete, handleRemove } from '../../store/ac
 import { DetailedViewButtons } from './DetailedViewButtons';
 import { DetailedViewInputs } from './DetailedViewInputs';
 import { styles } from './DetailedViewStyles';
+import { toast } from 'react-toastify'; 
 
 export class DetailedView extends Component {
 
@@ -60,6 +61,19 @@ export class DetailedView extends Component {
     componentDidMount () {
         this.props.getTodos();
     }
+    componentDidUpdate() {
+        console.log(this.props)
+        if (this.props.errors.error.length > 0) {
+            toast.error(this.props.errors.error, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            })
+        }
+    }
 
     render() {
         const { todo, classes, loaded } = this.props;
@@ -100,9 +114,9 @@ DetailedView.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state, props) => {
-	if(state.todos.loaded){
-		const currentTodo = state.todos.todos.find((todo) => todo.id === parseInt(props.match.params.id, 10));
+const mapStateToProps = (reduxState, props) => {
+	if(reduxState.todos.loaded){
+		const currentTodo = reduxState.todos.todos.find((todo) => todo.id === parseInt(props.match.params.id, 10));
         const { title, description, completed } = currentTodo;
 		const initialTodo = {
 			title: title,
@@ -112,14 +126,16 @@ const mapStateToProps = (state, props) => {
 		return { 
 			todo: currentTodo,
 			initialTodo: initialTodo,
-			loaded: state.todos.loaded 
+            loaded: reduxState.todos.loaded,
+            errors: reduxState.errors 
 		}
 	}
 
 	return { 
 		todo: {},
 		initialTodo: {},
-		loaded: state.todos.loaded 
+        loaded: reduxState.todos.loaded,
+        errors: reduxState.errors 
 	}
 };
 

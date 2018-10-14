@@ -5,17 +5,16 @@ const initialState = {
     loaded: false
 };
 
-export default function rootReducer (state = initialState, action) {
-    // debugger
+export default function rootReducer(state = initialState, action) {
     switch (action.type) {
-        case ActionTypes.GET_TODOS_SUCCESS: 
+        case ActionTypes.GET_TODOS_SUCCESS:
             return {
                 ...state,
-            loaded: true,
-            todos: action.todos
-        };
+                loaded: true,
+                todos: action.todos
+            };
         case ActionTypes.ADD_TODO:
-            return {...state, todos: [...state.todos, action.todo] };
+            return { ...state, todos: [...state.todos, action.todo] };
         case ActionTypes.COMPLETE_TODO:
             return {
                 ...state,

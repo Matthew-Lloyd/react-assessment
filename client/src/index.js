@@ -6,8 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
 import errorReducer from './store/reducers/errorReducer';
-import {Provider} from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
 import { watchTodos } from './store/sagas';
 
@@ -26,11 +26,11 @@ const store = createStore(
 sagaMiddleware.run(watchTodos);
 
 ReactDOM.render(
-    <Provider store= {store}>
+    <Provider store={store}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    </Provider>, 
+    </Provider>,
     document.getElementById('root')
 );
 registerServiceWorker();
